@@ -1,0 +1,23 @@
+body {
+    background: #323232;
+}
+
+.Select-control {
+    background-color: #323232 !important;
+    color:white;
+    width: 20%;
+    margin-left: 80%;
+}
+
+.Select-menu-outer {
+    background-color: #323232;
+    color: white;
+}
+
+.Select-value-label {
+    color: white !important;
+}
+
+.rc-slider-track {
+    background-color: #153c96;
+}

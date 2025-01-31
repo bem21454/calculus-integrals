@@ -9,7 +9,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def collect_data(row: int):
-    with (open('data.csv', 'r', newline='') as file):
+    with (open('data/data.csv', 'r', newline='') as file):
         reader = csv.reader(file, delimiter=',')
         raw_data = list(reader)
         years = np.array(list(map(lambda _: [int(_)], raw_data[0][1:])))
@@ -40,7 +40,7 @@ def generate_gpr_model(X, Y, source):
     gpr.fit(train_input, train_output)
 
     # Create test data
-    x = np.linspace(1950, 2050, 100_000)[:, np.newaxis]
+    x = np.linspace(1950, 2050, 12_801)[:, np.newaxis]
     y, sigma = gpr.predict(x, return_std=True)
 
     print(f'{source}: {gpr.score(X, Y)}')
@@ -61,10 +61,21 @@ def plot(X, Y, x, y, sigma, source):
     plt.ylabel('Emissions (MMT)')
 
 def main():
-    for _ in range(1, 8):
+    for _ in range(1, 8):  # 1-8
         years, emissions, source = collect_data(_)
         x, y, sigma = generate_gpr_model(years, emissions, source)
         plot(years, emissions, x, y, sigma, source)
+
+        data = zip(x.ravel(), y, sigma)
+        with open(f'data/{source}.csv', 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=['year', 'emission', 'std_dev'])
+            writer.writeheader()
+            writer.writerows({'year': y, 'emission': e, 'std_dev': s} for y, e, s in data)
+
+        with open(f'data/{source}_raw.csv', 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=['year', 'emission'])
+            writer.writeheader()
+            writer.writerows({'year': y, 'emission': e} for y, e in zip(years.ravel(), emissions))
     plt.show()
 
 if __name__ == "__main__":
