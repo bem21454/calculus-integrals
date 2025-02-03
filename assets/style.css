@@ -1,0 +1,40 @@
+body {
+    background: #323232;
+    font-family: Sans-serif;
+}
+
+.Select-control {
+    background-color: #323232 !important;
+    color:white;
+    width: 20%;
+    margin-left: 80%;
+}
+
+.Select-menu-outer {
+    background-color: #323232;
+    color: white;
+}
+
+.Select-value-label {
+    color: white !important;
+}
+
+.rc-slider-track {
+    background-color: #153c96;
+}
+
+.slider {
+    width: 80%;
+}
+
+.integral {
+    display: flex;
+}
+
+.int_out {
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 50px;
+}
