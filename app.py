@@ -1,7 +1,6 @@
 from dash import Dash, html, dcc, Input, Output, callback
 import plotly.graph_objs as go
 import pandas as pd
-import webview
 
 app = Dash()
 
@@ -130,7 +129,6 @@ def update_graph(dataset):
         yaxis=dict(title=dict(text='Emissions (MMT)')),
         xaxis=dict(title=dict(text='Year')),
         xaxis_range=[1950, 2050],
-        #title=dict(text=dataset),
         hovermode="x"
     )
     return fig
